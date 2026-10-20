@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fake or Real | Safety Checker</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">
+      <span class="brand-icon">✓</span>
+      Fake<span class="brand-light">or</span>Real
+    </a>
+    <span class="header-label">ONLINE SAFETY TOOL</span>
+  </header>
+
+  <main class="container">
+
+    
+<section class="dashboard">
+  <div class="dashboard-heading">
+    <div>
+      <div class="eyebrow">YOUR SECURITY OVERVIEW</div>
+      <h2>Welcome to your dashboard<span class="accent-dot">.</span></h2>
+      <p>Stay alert. Check before you trust.</p>
+    </div>
+    <div class="system-status">
+      <span class="status-pulse"></span>
+      Ready to scan
+    </div>
+  </div>
+
+  <div class="dashboard-stats">
+    <article class="stat-card">
+      <div class="stat-top">
+        <span>Total checks</span>
+        <span class="stat-icon">⌕</span>
+      </div>
+      <strong id="totalChecks">0</strong>
+      <small>Checks on this browser</small>
+    </article>
+
+    <article class="stat-card">
+      <div class="stat-top">
+        <span>High-risk results</span>
+        <span class="stat-icon danger-icon">!</span>
+      </div>
+      <strong id="highRiskChecks">0</strong>
+      <small>Results scoring 60+</small>
+    </article>
+
+    <article class="stat-card">
+      <div class="stat-top">
+        <span>Latest risk score</span>
+        <span class="stat-icon">◉</span>
+      </div>
+      <strong><span id="latestScore">--</span><small class="score-unit"> / 100</small></strong>
+      <small id="latestStatus">Waiting for first scan</small>
+    </article>
+  </div>
+
+  <div class="dashboard-bottom">
+    <article class="activity-card">
+      <div class="activity-heading">
+        <div>
+          <h3>Recent activity</h3>
+          <p>Your latest security checks</p>
+        </div>
+        <span class="activity-live">LIVE</span>
+      </div>
+      <div id="recentChecks" class="recent-checks">
+        <div class="empty-activity">
+          <span class="empty-icon">⌕</span>
+          <p>No checks yet.</p>
+          <small>Your analysis history will appear here.</small>
+        </div>
+      </div>
+    </article>
+
+    <article class="security-card">
+      <div class="security-orbit">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring orbit-ring-two"></div>
+        <div class="orbit-core">✓</div>
+      </div>
+      <div class="eyebrow">SAFETY FIRST</div>
+      <h3>Think before you click.</h3>
+      <p>Check unfamiliar links, question urgent requests, and never share your OTP or password.</p>
+      <div class="security-tag">✦ Stay cyber smart</div>
+    </article>
+  </div>
+</section>
+
+    <section class="hero">
+      <div class="eyebrow"><span class="live-dot"></span> SMART SCAM CHECKER</div>
+      <h1>Think before<br><span>you trust.</span></h1>
+      <p class="hero-text">
+        Check suspicious messages and website links for common scam
+        signals before you click, reply, or share personal information.
+      </p>
+    </section>
+
+    <section class="checker card">
+      <div class="mode-tabs" role="tablist" aria-label="Choose checking mode">
+        <button class="mode-tab active" type="button"
+                data-mode="message" role="tab" aria-selected="true">
+          ✉ Message Checker
+        </button>
+        <button class="mode-tab" type="button"
+                data-mode="url" role="tab" aria-selected="false">
+          ↗ URL Checker
+        </button>
+      </div>
+
+      <form id="checkerForm">
+        <label id="inputLabel" for="messageInput">Paste your message</label>
+        <p class="input-description" id="inputDescription">
+          Include the complete text you want to check.
+        </p>
+
+        <textarea
+          id="messageInput"
+          name="message"
+          rows="6"
+          placeholder="Example: Congratulations! You won a prize. Click this link immediately to claim your reward..."
+          required
+        ></textarea>
+
+        <div class="input-footer">
+          <span id="inputHint">Your text is analyzed for common warning signs.</span>
+          <span id="charCount">0 characters</span>
+        </div>
+
+        <button id="analyzeButton" class="analyze-button" type="submit">
+          <span>Analyze Now</span>
+          <span aria-hidden="true">→</span>
+        </button>
+      </form>
+
+      <p class="privacy-note">🔒 Your text is analyzed in this browser.
+        URL checks are sent to your local backend.</p>
+    </section>
+
+    <section id="result" class="result-card card" hidden aria-live="polite">
+      <div class="result-heading">
+        <div>
+          <div class="eyebrow">ANALYSIS REPORT</div>
+          <h2>Your results</h2>
+        </div>
+        <span id="riskBadge" class="risk-badge">Low Risk</span>
+      </div>
+
+      <div class="score-layout">
+        <div class="score-circle" id="scoreCircle">
+          <div class="score-inner">
+            <strong id="score">0</strong>
+            <span>/ 100</span>
+          </div>
+        </div>
+        <div class="score-info">
+          <h3 id="riskLevel">Low Risk</h3>
+          <p id="resultSummary">Analysis complete.</p>
+          <p class="score-caption">Higher scores indicate more warning signs.</p>
+        </div>
+      </div>
+
+      <div class="report-section">
+        <h3>⚠ Warning signs</h3>
+        <ul id="warnings" class="warning-list"></ul>
+      </div>
+
+      <div class="advice-box">
+        <h3>🛡 Safety advice</h3>
+        <p id="advice"></p>
+      </div>
+
+      <p class="disclaimer">
+        This is an automated warning tool, not proof that something is
+        genuine or fraudulent. Always verify using an official source.
+      </p>
+
+      <button id="checkAgain" class="secondary-button" type="button">
+        Check another message
+      </button>
+    </section>
+
+    <section class="tips-section">
+      <div class="eyebrow">STAY ONE STEP AHEAD</div>
+      <h2>Three rules to remember</h2>
+      <div class="tips-grid">
+        <article class="tip-card">
+          <span class="tip-icon">🔗</span>
+          <h3>Check the link</h3>
+          <p>Look carefully for misspelled or unfamiliar website addresses.</p>
+        </article>
+        <article class="tip-card">
+          <span class="tip-icon">⏳</span>
+          <h3>Don't rush</h3>
+          <p>Scammers may pressure you to act immediately or threaten you.</p>
+        </article>
+        <article class="tip-card">
+          <span class="tip-icon">🔐</span>
+          <h3>Protect your data</h3>
+          <p>Never share passwords, PINs, or OTPs with someone who contacts you.</p>
+        </article>
+      </div>
+    </section>
+    
+<section class="card test-lab" id="testLab">
+  <p class="eyebrow">HACKATHON DEMO</p>
+  <h2>Scam Detection Test Lab</h2>
+  <p>
+    Test the detector against sample messages and compare its
+    prediction with the expected category.
+  </p>
+
+  <button type="button" id="runTestsButton">
+    Run All Tests
+  </button>
+
+  <div id="testLabSummary" aria-live="polite">
+    Click Run All Tests to begin.
+  </div>
+
+  <div class="test-metrics" id="testMetrics" hidden>
+    <div class="test-metric">
+      <span>Passed</span>
+      <strong id="testsPassed">0</strong>
+    </div>
+    <div class="test-metric">
+      <span>Failed</span>
+      <strong id="testsFailed">0</strong>
+    </div>
+    <div class="test-metric">
+      <span>False positives</span>
+      <strong id="falsePositives">0</strong>
+    </div>
+    <div class="test-metric">
+      <span>False negatives</span>
+      <strong id="falseNegatives">0</strong>
+    </div>
+  </div>
+
+  <div id="testResults" class="test-results"></div>
+
+  <p class="test-disclaimer">
+    These are illustrative test messages, not a representative
+    real-world dataset. Passing these tests does not prove that
+    the detector is accurate for all scams.
+  </p>
+</section>
+
+  </main>
+
+  <footer>Fake or Real · Stay alert. Stay safe.</footer>
+</body>
+</html>
